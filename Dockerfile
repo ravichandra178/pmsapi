@@ -25,8 +25,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY .env.prod .env
 COPY . .
 
-# Run migrations and collect static files
-RUN python manage.py migrate
-
 # Expose port
 EXPOSE 8000

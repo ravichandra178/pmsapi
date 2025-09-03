@@ -24,13 +24,13 @@ env_file = os.getenv('DJANGO_ENV', 'dev') == 'prod' and '.env.prod' or '.env.dev
 load_dotenv(os.path.join(BASE_DIR, env_file))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-92i5l0(5^3p2i2qdyax9#4#40g9s56hh_sp5pl$$oj)oml+id@')  # Fallback for dev
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_ENV', 'dev') == 'dev'
 
 # Allowed hosts
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] if os.getenv('DJANGO_ENV', 'dev') == 'dev' else ['yourdomain.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 # Application definition
 
@@ -114,11 +114,11 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'pms_dev' if os.getenv('DJANGO_ENV', 'dev') == 'dev' else 'pms'),
-        'USER': os.getenv('POSTGRES_USER', 'pms_user' if os.getenv('DJANGO_ENV', 'dev') == 'dev' else 'pms_user'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'pms_password' if os.getenv('DJANGO_ENV', 'dev') == 'dev' else 'pms_password'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost' if os.getenv('DJANGO_ENV', 'dev') == 'dev' else 'db'),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
 
@@ -158,7 +158,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

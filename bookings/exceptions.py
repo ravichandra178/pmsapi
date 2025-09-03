@@ -17,7 +17,7 @@ def validate_booking(room, check_in, check_out, instance=None):
     """Validate booking"""
     if not check_in:
         check_in = timezone.now()  # Mimic auto_now_add
-    if not (check_in >= timezone.now()):
+    if not (check_in.date() >= timezone.now().date()):
         raise PastDateError()
     # Refresh room
     room = room.__class__.objects.get(pk=room.pk)
