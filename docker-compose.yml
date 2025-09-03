@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_ENV=prod
+      - POSTGRES_DB=pms
+      - POSTGRES_USER=pms_user
+      - POSTGRES_PASSWORD=pms_password
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - SECRET_KEY=${SECRET_KEY}
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    command: gunicorn --bind 0.0.0.0:8000 pms.wsgi:application
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=pms_user
+      - POSTGRES_PASSWORD=pms_password
+      - POSTGRES_DB=pms
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

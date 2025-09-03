@@ -23,4 +23,6 @@ urlpatterns = [
     path("api/", include("rest_framework.urls")),
     path('api/auth/', include('authentication.urls')),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/rooms/', include('rooms.urls')),
+    path('api/bookings/', include('bookings.urls')),
 ]

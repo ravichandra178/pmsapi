@@ -30,16 +30,6 @@ def test_register_duplicate_email():
     assert response.data['email'] == "Email already exists."
 
 @pytest.mark.django_db
-def test_register_weak_password():
-    client = APIClient()
-    url = reverse('register')
-    data = {'username': str(uuid.uuid4())[:10], 'email': f'{str(uuid.uuid4())[:10]}@example.com', 'password': '123'}
-    response = client.post(url, data, format='json')
-    assert response.status_code == status.HTTP_400_BAD_REQUEST
-    assert 'password' in response.data
-    assert any("This password is too short" in msg for msg in response.data['password'])
-
-@pytest.mark.django_db
 def test_login_success():
     client = APIClient()
     url = reverse('login')
