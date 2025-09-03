@@ -4,13 +4,14 @@ Project Structure
 
 Prerequisites
 
-Python 3.10+
-Postman: For testing API endpoints.
-psql: For interacting with PostgreSQL (optional).
+- Python 3.10+
+- Postman: For testing API endpoints.
+- psql: For interacting with PostgreSQL (optional).
 
 Setup for Local Development
-1. Create .env.dev
+1. Create ```.env.dev```
 Create a file named .env.dev in the root of the repository with the following content:
+```env
 DJANGO_ENV=dev
 POSTGRES_DB=pms
 POSTGRES_USER=pms_user
@@ -20,24 +21,31 @@ POSTGRES_PORT=5432
 SECRET_KEY=your-dev-secret-key
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
+```
 
-
-2. Ensure requirements.txt
+2. Ensure ```requirements.txt```
 Verify that requirements.txt contains:
+
+```text
 django>=4.0
 djangorestframework>=3.13
 djangorestframework-simplejwt>=5.2
 psycopg2-binary>=2.9 # only for postgres, 
 python-dotenv>=0.19
-
+```
 3. Run migrations
+```text
 python manage.py migrate
-
+```
 4. Run Tests
-Run tests verify the application:
+verify the application:
+'''text
 pytest
+```
 
 5. Test API with Postman
+
+```text   
 Use Postman to test the API endpoints:
 Register
 
@@ -110,9 +118,11 @@ Body:{
 
 
 Expected: 200 OK, status: "CHECKED_OUT", full_price: "100.00", is_available: true, total_price: "100.00"
-
+```
 
 Setup for Production
+
+```text
 1. Create .env.prod
 Create a file named .env.prod in the root of the repository with the following content:
 DJANGO_ENV=prod
@@ -143,3 +153,4 @@ docker-compose up -d
 docker-compose exec web python manage.py migrate
 
 5. Test API with Postman.
+```
