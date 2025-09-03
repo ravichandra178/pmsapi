@@ -1,6 +1,6 @@
 Property Management System
 Property Management System (PMS), a Django-based REST API for managing hotel bookings. The application uses Django REST Framework, PostgreSQL, and JWT authentication, with endpoints for user registration, login, room creation, check-in, and checkout. It is containerized using Docker and docker-compose for production environment.
-Project Structure
+This uses price of the property multiplied by the number of days stay at the property to calculate total price .
 
 Prerequisites
 
