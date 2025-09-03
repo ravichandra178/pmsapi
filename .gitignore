@@ -4,4 +4,4 @@
 db.sqlite3
 .env
 .vscode/
-.env.dev
+.env*
